@@ -18,12 +18,17 @@ Domena: thedigitalrepublic.org
 ### Struktura na serwerze
 ```
 /domains/thedigitalrepublic.org/public_html/
-└── index.html
+├── index.html          (PL — thedigitalrepublic.org)
+└── en/
+    └── index.html      (EN — thedigitalrepublic.org/en/)
 ```
 
-### Upload z CLI
+Ten sam plik index.html w obu lokalizacjach — język wykrywany automatycznie po ścieżce `/en/`.
+
+### Upload z CLI (oba pliki!)
 ```bash
 curl -s -T "index.html" --user 'tyramomphf:2Lmz9EFZAhJd2K68htnW' "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/index.html"
+curl -s -T "index.html" --user 'tyramomphf:2Lmz9EFZAhJd2K68htnW' "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/en/index.html"
 ```
 
 ### Deploy workflow
