@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifest Cyfrowej Republiki - TheDigitalRepublic.org</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            padding-top: 4rem;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        h2 {
+            margin-top: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            scroll-margin-top: 5rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+        #wsparcie-finansowe, #faq details, #plan-dzialania, #autor {
+             scroll-margin-top: 5rem;
+        }
+        #fundamenty > article > h3::before {
+            content: counter(fundament-counter) ". ";
+            counter-increment: fundament-counter;
+            font-weight: 700;
+            color: #1e40af;
+        }
+        #fundamenty {
+            counter-reset: fundament-counter;
+        }
+        #techno-optymizm ul {
+            list-style-type: disc;
+        }
+        ul {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        strong {
+            font-weight: 600;
+        }
+        #autor img {
+            float: left;
+            margin-right: 1.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        #autor::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        stripe-buy-button {
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        #plan-dzialania .roadmap-phase {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-left: 2px solid #d1d5db;
+        }
+        #plan-dzialania .roadmap-phase:last-child {
+            border-left: none;
+            padding-bottom: 0;
+        }
+        #plan-dzialania .roadmap-phase::before {
+            content: attr(data-phase);
+            position: absolute;
+            left: -0.75rem;
+            top: -0.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 50%;
+            background-color: #e0f2fe;
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        #plan-dzialania .roadmap-phase:last-child::before {
+            top: 0;
+        }
+        #plan-dzialania .roadmap-phase.current::before {
+            background-color: #f97316;
+            color: white;
+        }
+
+        #faq details {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+        #faq summary {
+            font-weight: 600;
+            cursor: pointer;
+            color: #1f2937;
+            list-style: none;
+        }
+        #faq summary::-webkit-details-marker { display: none; }
+        #faq summary::before {
+            content: '+';
+            display: inline-block;
+            margin-right: 0.5rem;
+            font-weight: bold;
+            transition: transform 0.2s ease-in-out;
+        }
+        #faq details[open] summary::before {
+            transform: rotate(45deg);
+        }
+        #faq details > div {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+            color: #4b5563;
+        }
+        .faq-link {
+            display: inline-block;
+            margin-left: 0.25rem;
+            color: #60a5fa;
+            text-decoration: none;
+            position: relative;
+            cursor: help;
+        }
+        .faq-link .tooltip {
+            visibility: hidden;
+            width: 160px;
+            background-color: #374151;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        .faq-link:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .faq-link svg {
+            width: 0.8em;
+            height: 0.8em;
+            vertical-align: baseline;
+        }
+        nav a {
+            transition: color 0.2s ease-in-out;
+        }
+        nav a:hover {
+            color: #2563eb;
+        }
+        .early-support-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .early-support-link:hover {
+            background-color: #bae6fd;
+        }
+        .early-support-link svg {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-right: 0.25rem;
+            vertical-align: text-bottom;
+        }
+
+        /* Language switcher */
+        .lang-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-left: 0.75rem;
+            padding: 0.2rem 0.4rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+        }
+        .lang-switcher .lang-opt {
+            padding: 0.15rem 0.35rem;
+            border-radius: 0.25rem;
+            color: #6b7280;
+            transition: all 0.15s;
+        }
+        .lang-switcher .lang-opt.active {
+            background-color: #2563eb;
+            color: #fff;
+        }
+
+    </style>
+    </head>
+<body class="bg-gray-100 text-gray-800 leading-relaxed">
+
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50 py-3 px-4">
+        <div class="container mx-auto max-w-4xl flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-sm md:text-base">
+            <a href="#preambula" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.preamble">Preambuła</a>
+            <a href="#fundamenty" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.foundations">Fundamenty</a>
+            <a href="#techno-optymizm" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.techno">Techno-Optymizm</a>
+            <a href="#plan-dzialania" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.roadmap">Plan Działania</a>
+            <a href="#wezwanie" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.engage">Zaangażuj się</a>
+            <a href="#faq" class="text-gray-700 hover:text-blue-600 font-medium">FAQ</a>
+            <a href="#autor" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.author">O Autorze</a>
+            <button class="lang-switcher" id="lang-switcher" aria-label="Switch language">
+                <span class="lang-opt active" data-lang="pl">PL</span>
+                <span class="lang-opt" data-lang="en">EN</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container mx-auto max-w-4xl px-4 py-8 md:py-12">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-700 mb-4" data-i18n="header.title">Manifest Cyfrowej Republiki</h1>
+            <p class="text-lg text-gray-600" data-i18n="header.subtitle">Wizja przyszłości opartej na technologii, transparentności i odpowiedzialności.</p>
+        </header>
+
+        <section id="preambula" class="mb-8 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl md:text-3xl text-blue-600 mb-4" data-i18n="preamble.title">Preambuła</h2>
+            <p class="mb-4" data-i18n="preamble.p1">Żyjemy w erze bezprecedensowego postępu technologicznego. Narzędzia cyfrowe, sztuczna inteligencja i globalna sieć informacyjna mają potencjał, by fundamentalnie zmienić nasze społeczeństwa na lepsze. Niniejszy manifest powstał z potrzeby budowania świadomości i przedstawienia wizji, jak technologia może i powinna wspierać poprawę codziennego życia ludzkości, zwiększać transparentność, wzmacniać odpowiedzialność i chronić wolność jednostki.</p>
+            <p class="mb-4" data-i18n="preamble.p2">Przedstawiamy zarys Cyfrowej Republiki – społeczeństwa opartego na przejrzystości, racjonalności i poszanowaniu praw, gdzie technologia służy obywatelom. Wierzymy, że te zasady mogą i powinny stać się fundamentem lepszej przyszłości.</p>
+            <p class="mt-4" data-i18n="preamble.p3">Wdrożenie zasad tego manifestu stworzy mocne podstawy sprawnego i sprawiedliwego państwa. Można to porównać do budowania silnego organizmu człowieka – z mocnym szkieletem i sprawnymi mięśniami. Takie państwo, niezależnie od obranych celów strategicznych czy politycznych ustrojów, dzięki solidnym fundamentom i zdrowym procesom, będzie efektywniej osiągać swoje cele, z których służba obywatelom jest celem najwyższym.</p>
+        </section>
+
+        <section id="fundamenty" class="mb-8 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl md:text-3xl text-blue-600 mb-6" data-i18n="foundations.title">Fundamenty Cyfrowej Republiki</h2>
+
+            <article class="mb-6">
+                <h3 class="text-xl md:text-2xl text-blue-800 mb-3" data-i18n="foundations.data.title">Zarządzanie oparte o dane</h3>
+                <ul class="list-disc space-y-2 ml-4">
+                    <li data-i18n-html="foundations.data.li1"><strong>Decyzje oparte na faktach:</strong> Dysponujemy technologiami pozwalającymi gromadzić i analizować ogromne ilości danych. Postulujemy, aby dążyć do maksymalnego wykorzystania tych możliwości w procesach decyzyjnych państwa, zwłaszcza na poziomie strategicznym. Decyzje powinny opierać się na rzetelnych danych, modelowaniu i prognozowaniu przy użyciu najlepszych dostępnych systemów przetwarzania informacji i sztucznej inteligencji, a nie na intuicji, ideologii czy partykularnych interesach.</li>
+                    <li data-i18n-html="foundations.data.li2"><strong>Algorytmiczna decyzyjność i zaufanie:</strong> Uważamy, że podejmowanie decyzji przez transparentne algorytmy, oparte na publicznie dostępnych danych i zorientowane na poprawę życia obywateli, będzie budować zaufanie społeczne. Możliwość mierzenia efektywności tych decyzji również za pomocą danych pozwoli na ich ciągłe doskonalenie. Wraz z rosnącą ilością gromadzonych danych oraz ze wzrostem zaufania, coraz więcej rutynowych i operacyjnych decyzji będzie można powierzać algorytmom, uwalniając ludzki potencjał do zadań nadzorczych.</li>
+                    <li data-i18n-html="foundations.data.li3"><strong>Otwartość i weryfikacja:</strong> Kluczowe jest zapewnienie wolności tworzenia alternatywnych algorytmów przez obywateli, naukowców czy organizacje pozarządowe. Umożliwi to niezależną weryfikację skuteczności algorytmów stosowanych przez państwo, porównywanie wyników i prowadzenie otwartej debaty publicznej na temat najlepszych rozwiązań – wszystko w oparciu o te same, publicznie dostępne dane.</li>
+                    <li data-i18n-html="foundations.data.li4"><strong>Kompromisy oparte na danych:</strong> Zdajemy sobie sprawę, że zarządzanie państwem często wymaga trudnych kompromisów, np. między dobrem ogółu a wolnością jednostki. Postulujemy, aby nawet te kompromisy były podejmowane w oparciu o jak najszerszy zakres danych i najlepsze dostępne analizy algorytmiczne, zawsze mając na uwadze nadrzędne cele: dobro ludzkości i poszanowanie podstawowych wolności. Nie opowiadamy się za konkretnym ustrojem politycznym czy predefiniowanymi rozwiązaniami w zakresie praw obywatelskich – interesuje nas proces decyzyjny oparty na danych i dowodach, który pozwoli wybrać najlepszą drogę do realizacji tych celów.</li>
+                </ul>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl md:text-2xl text-blue-800 mb-3" data-i18n="foundations.freedom.title">Wolność i Prawa Jednostki</h3>
+                <ul class="list-disc space-y-2 ml-4">
+                    <li data-i18n-html="foundations.freedom.li1"><strong>Nadrzędność wolności:</strong> Nadrzędną zasadą Cyfrowej Republiki jest dążenie do maksymalnej efektywności zarządzania państwem w kierunku poprawy dobrobytu obywateli, przy jednoczesnym maksymalnym poszanowaniu podstawowych wolności człowieka. Wolność jednostki jest wartością fundamentalną, a jej ograniczenia mogą następować jedynie w wyjątkowych, ściśle określonych prawem sytuacjach, gdy jest to absolutnie konieczne dla ochrony dobra wspólnego lub praw innych osób, i zawsze w sposób transparentny i podlegający kontroli.</li>
+                    <li data-i18n-html="foundations.freedom.li2"><strong>Bezpieczna Tożsamość Cyfrowa:</strong> Uważamy za potrzebne wprowadzenie powszechnego, ale dobrowolnego i wysoce zabezpieczonego systemu tożsamości cyfrowej, który ułatwi obywatelom bezpieczny dostęp do usług publicznych i prywatnych, głosowań elektronicznych oraz zarządzanie własnymi danymi. Chcemy, aby system ten gwarantował najwyższe standardy ochrony prywatności i bezpieczeństwa.</li>
+                    <li data-i18n-html="foundations.freedom.li3"><strong>Suwerenność Danych Osobowych:</strong> Chcemy jasnego zdefiniowania praw obywateli do zarządzania własnymi danymi osobowymi, w tym prawa do wglądu, przenoszenia, usuwania i ograniczania przetwarzania danych przez podmioty publiczne i prywatne, z wyjątkiem sytuacji określonych prawem (np. bezpieczeństwo narodowe, egzekwowanie prawa).</li>
+                </ul>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl md:text-2xl text-blue-800 mb-3" data-i18n="foundations.transparency.title">Radykalna transparentność i cyfryzacja</h3>
+                <p class="mb-4 ml-4" data-i18n-html="foundations.transparency.intro">Na drodze do wdrożenia efektywnego, opartego na danych i algorytmach zarządzania państwem stoi fundamentalna przeszkoda: korupcja i brak transparentności, które są jednymi z największych bolączek współczesnego świata. Jesteśmy przekonani, że najskuteczniejszą bronią w walce z tymi patologiami jest radykalna, wymuszona technologicznie transparentność działań władzy.
+                    <a href="#faq-korupcja" class="faq-link" title="Dlaczego transparentność jest kluczowa?">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
+                        <span class="tooltip" data-i18n="tooltip.faq">Kliknij, aby dowiedzieć się więcej w FAQ</span>
+                    </a>
+                </p>
+                <ul class="list-disc space-y-2 ml-4">
+                    <li data-i18n-html="foundations.transparency.li1"><strong>Cyfryzacja jako podstawa danych:</strong> Postulujemy pełną cyfryzację wszelkich możliwych obszarów działalności państwowej i administracji publicznej. Tylko w ten sposób możliwe będzie efektywne gromadzenie kompleksowych danych niezbędnych do rzetelnej analizy, modelowania, prognozowania oraz późniejszej automatyzacji procesów decyzyjnych i wykonawczych.</li>
+                    <li data-i18n-html="foundations.transparency.li2"><strong>Przepływy finansowe:</strong> Postulujemy wprowadzenie systemu pełnej, publicznej i natychmiastowej transparentności przepływów finansowych pochodzących z podatków. Chcemy, aby każdy obywatel miał dostęp online do szczegółowych informacji: skąd pochodzą środki, do kogo i jakim tytułem zostały przekazane, w jakim celu, kto podjął decyzję o wydatku, kto ją wykonał oraz jaka była podstawa prawna tej decyzji.</li>
+                    <li data-i18n-html="foundations.transparency.li3"><strong>Transparentność demokratyczna i partycypacja:</strong> Uważamy, że należy stworzyć łatwo dostępne narzędzia online pozwalające na bieżąco śledzić, jak głosowali przedstawiciele w każdej sprawie, oraz porównywać te głosowania z ich obietnicami. Postulujemy również wdrożenie bezpiecznych systemów głosowania elektronicznego oraz rozwój platform cyfrowych umożliwiających szerszą partycypację obywatelską (konsultacje, panele, budżety partycypacyjne, referenda online).</li>
+                    <li data-i18n-html="foundations.transparency.li4"><strong>Historia zatrudnienia:</strong> Postulujemy, aby pełna historia zatrudnienia (zarówno w sektorze publicznym, jak i prywatnym) oraz powiązań biznesowych polityków i kluczowych urzędników państwowych była jawna i łatwo weryfikowalna online przez cały okres pełnienia przez nich funkcji publicznych oraz przez określony czas po ich zakończeniu.</li>
+                    <li data-i18n-html="foundations.transparency.li5"><strong>Szczelność podatkowa:</strong> Chcemy wykorzystać technologię do stworzenia maksymalnie szczelnego systemu podatkowego. Uważamy, że informacje o majątkach i płaconych podatkach (z poszanowaniem uzasadnionej prywatności w zakresie danych wrażliwych niezwiązanych z działalnością publiczną) powinny być w dużym stopniu transparentne, aby zapewnić sprawiedliwość i uniemożliwić ukrywanie dochodów.</li>
+                    <li data-i18n-html="foundations.transparency.li6"><strong>Automatyzacja i nadzór:</strong> Postulujemy maksymalną automatyzację procesów decyzyjnych i administracyjnych w sektorze publicznym za pomocą algorytmów, w tym AI. Celem jest eliminacja uznaniowości, marnotrawstwa i możliwości korupcyjnych. Kluczowe jest jednak zachowanie pełnej transparentności działania tych algorytmów (ich logiki i kryteriów decyzyjnych) oraz zapewnienie skutecznego ludzkiego nadzoru nad ich funkcjonowaniem. Rola człowieka powinna ewoluować z wykonawcy na kontrolera i audytora systemów automatycznych.</li>
+                    <li data-i18n-html="foundations.transparency.li7"><strong>Wyjątki:</strong> Akceptujemy, że pełnej transparentności nie będą podlegać projekty czy procesy o kluczowym znaczeniu dla bezpieczeństwa państwa, przy czym zakres i uzasadnienie tajności powinny podlegać ścisłej kontroli organów Państwa.</li>
+                </ul>
+            </article>
+
+        </section>
+
+        <section id="techno-optymizm" class="mb-8 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl md:text-3xl text-blue-600 mb-6" data-i18n="techno.title">Technologia w Służbie Ludzkości</h2>
+            <p class="mb-4" data-i18n="techno.intro">Wierzymy, że postęp technologiczny jest potężnym narzędziem, które, odpowiednio ukierunkowane, może znacząco przyczynić się do rozwoju cywilizacji i poprawy jakości ludzkiego życia. Podzielamy ducha techno-optymizmu, rozumianego jako wiarę w potencjał technologii do rozwiązywania problemów i tworzenia lepszej przyszłości dla wszystkich, przy jednoczesnym zachowaniu czujności wobec potencjalnych zagrożeń i konieczności etycznego zarządzania jej rozwojem. Nasz optymizm opiera się na następujących przekonaniach:</p>
+            <ul class="list-disc space-y-2 ml-4">
+                <li data-i18n-html="techno.li1"><strong>Wzrost dla Dobrobytu:</strong> Dążymy do dynamicznego rozwoju gospodarczego i technologicznego, ukierunkowanego na zwiększenie dobrobytu ogółu, wydłużenie zdrowego życia, poszerzenie możliwości edukacyjnych i kulturowych oraz eliminację ubóstwa. Odrzucamy ideę stagnacji jako szkodliwą dla ludzkiego potencjału.</li>
+                <li data-i18n-html="techno.li2"><strong>Technologia jako Narzędzie Rozwiązań:</strong> Wierzymy w potencjał technologii do rozwiązywania fundamentalnych problemów ludzkości – od chorób i niedostatku, po wyzwania energetyczne i środowiskowe. Technologia nie jest celem sama w sobie, lecz kluczowym narzędziem w służbie ludzkiego postępu i dobrostanu.</li>
+                <li data-i18n-html="techno.li3"><strong>Inteligencja i Rynki dla Ludzi:</strong> Uznajemy siłę połączonej inteligencji – ludzkiej i sztucznej – oraz mechanizmów rynkowych jako systemów efektywnego rozwiązywania problemów i alokacji zasobów, pod warunkiem, że służą one społeczeństwu. Wolne, ale odpowiedzialne rynki mogą napędzać innowacje i konkurencję, prowadząc do lepszych i bardziej dostępnych rozwiązań dla wszystkich.</li>
+                <li data-i18n-html="techno.li4"><strong>Energia dla Rozwoju:</strong> Dostęp do taniej, czystej i obfitej energii jest kluczowy dla rozwoju cywilizacji i poprawy jakości życia. Popieramy rozwój wszystkich form zrównoważonej energii, w tym energetyki jądrowej nowej generacji, aby zaspokoić rosnące potrzeby świata w sposób przyjazny dla środowiska.</li>
+                <li data-i18n-html="techno.li5"><strong>Ambicja Tworzenia Lepszego Świata:</strong> Wzywamy do odwagi, ambicji i chęci budowania przyszłości, w której technologia służy ludzkości. Odrzucamy pesymizm i strach przed zmianą, jednocześnie podkreślając potrzebę odpowiedzialności i przewidywania konsekwencji naszych działań. Przyszłość jest otwarta i zależy od naszej woli tworzenia, odkrywania i mądrego kierowania postępem.</li>
+                <li data-i18n-html="techno.li6"><strong>Rozwiązywanie Problemów z Myślą o Człowieku:</strong> Z odpowiednią dozą inteligencji, technologii, kapitału i woli politycznej, ludzkość jest w stanie sprostać każdemu wyzwaniu, o ile celem nadrzędnym pozostaje dobro człowieka i planety.</li>
+            </ul>
+        </section>
+
+        <section id="plan-dzialania" class="mb-8 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl md:text-3xl text-blue-600 mb-6" data-i18n="roadmap.title">Plan Działania</h2>
+            <p class="mb-6" data-i18n="roadmap.intro">Realizacja wizji Cyfrowej Republiki wymaga świadomości, debaty i zaangażowania. Poniżej przedstawiamy naszą roadmapę, która nakreśla najbliższe kroki w dążeniu do tego celu. Początek naszej drogi zaczynamy od własnej transparentności, zbierania datków na wsparcie projetku i budowanie System Transparentności Politycznej</p>
+
+            <div class="mb-8">
+                <div class="roadmap-phase current" data-phase="0">
+                    <h4 class="font-semibold mb-1 text-gray-800" data-i18n="roadmap.phase0.title">Faza 0: Fundamenty i Wzrost Organiczny</h4>
+                    <p class="text-sm text-gray-700 opacity-90" data-i18n="roadmap.phase0.desc">Dopracowanie manifestu i strony (FAQ, Słownik, Newsletter). SEO. Uruchomienie profili w mediach społecznościowych. Promocja przez istniejące kanały autora. Budowanie listy mailingowej. Kontakty z sojusznikami/wolontariuszami. Rozpoczęcie zbierania środków na promocję manifestu (przycisk dotacji).</p>
+                    <p class="text-xs text-gray-600 opacity-70 mt-1" data-i18n="roadmap.phase0.goal">Cel: Zbudowanie publiczności, test przekazu, zebranie opinii i małych donacji, infrastruktura online.</p>
+                </div>
+                <div class="roadmap-phase" data-phase="1">
+                    <h4 class="font-semibold mb-1 text-gray-800" data-i18n="roadmap.phase1.title">Faza 1: Budowa Systemu Transparentności Finansowej</h4>
+                    <p class="text-sm text-gray-700 opacity-90" data-i18n="roadmap.phase1.desc">Wykorzystanie zebranych środków na stworzenie mechanizmu automatycznego raportowania na stronie manifestu wszystkich datków i wydatków Manifestu. Przeznaczanie środków na promocję manifestu w celu zaangażowania społeczności i zwiększenia liczby wpłat.</p>
+                     <p class="text-xs text-gray-600 opacity-70 mt-1" data-i18n="roadmap.phase1.goal">Cel: Wdrożenie transparentności finansowej, budowanie zaufania, dalszy wzrost zasięgu.</p>
+                </div>
+                <div class="roadmap-phase" data-phase="2">
+                    <h4 class="font-semibold mb-1 text-gray-800" data-i18n="roadmap.phase2.title">Faza 2: Uruchomienie Systemu Transparentności Finansowej i Skalowanie</h4>
+                    <p class="text-sm text-gray-700 opacity-90" data-i18n="roadmap.phase2.desc">Uruchmoenie w pełni automatycznego raportowania wpłat i wydadatków Manifestu. Ciągłe finansowanie kampanii marketingowej Manifestu. Aplikowanie o granty. Organizowanie kampanii crowdfundingowych. Skalowanie projektu w skali globalnej.</p>
+                     <p class="text-xs text-gray-600 opacity-70 mt-1" data-i18n="roadmap.phase2.goal">Cel: Budowanie wiarygodności. Zwiększenie zasięgu, pozyskanie środków na kolejne etapy rozwoju.</p>
+                </div>
+                <div class="roadmap-phase" data-phase="3">
+                    <h4 class="font-semibold mb-1 text-gray-800" data-i18n="roadmap.phase3.title">Faza 3: Budowa Systemu Transparentności Politycznej</h4>
+                    <p class="text-sm text-gray-700 opacity-90" data-i18n="roadmap.phase3.desc">Rozwój MVP (Minimum Viable Product) narzędzi do automatycznego monitoringu i weryfikacji zgodności działań polityków z ich deklaracjami oraz z postulatami Manifestu.</p>
+                     <p class="text-xs text-gray-600 opacity-70 mt-1" data-i18n="roadmap.phase3.goal">Cel: Dostarczenie pierwszych działających narzędzi weryfikacyjnych, dalsze pozyskiwanie funduszy.</p>
+                </div>
+                <div class="roadmap-phase" data-phase="4">
+                    <h4 class="font-semibold mb-1 text-gray-800" data-i18n="roadmap.phase4.title">Faza 4: Uruchomienie i MVP Systemu Transparentności Politycznej</h4>
+                    <p class="text-sm text-gray-700 opacity-90" data-i18n="roadmap.phase4.desc">Rozbudowa platformy i narzędzi weryfikacyjnych. Dalsze skalowanie działań marketingowych Manifestu. Rozważenie wsparcia dla zgodnych ideowo aktorów politycznych. Budowanie partnerstw strategicznych.</p>
+                     <p class="text-xs text-gray-600 opacity-70 mt-1" data-i18n="roadmap.phase4.goal">Cel: Uruchomienie MVP, wpływ na debatę publiczną, skalowanie projektu.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="wezwanie" class="mb-8 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg">
+            <h2 class="text-2xl md:text-3xl mb-4 font-bold" data-i18n="engage.title">Zaangażuj się!</h2>
+            <p class="mb-6" data-i18n="engage.intro">Jeśli zgadzasz się z przedstawionymi postulatami i wierzysz, że technologia może budować lepsze, bardziej transparentne i sprawiedliwe społeczeństwo, dołącz do nas!</p>
+
+            <div class="mb-8 p-4 bg-white bg-opacity-10 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2 text-center" data-i18n="engage.probono.title">Jak możesz pomóc pro bono?</h3>
+                <p class="text-center mb-3" data-i18n="engage.probono.subtitle">Twoje umiejętności, czas i pomysły są równie cenne!</p>
+                <ul class="list-disc space-y-1 ml-6 mb-4 text-sm opacity-90">
+                    <li data-i18n="engage.probono.li1">Masz umiejętności programistyczne, graficzne, marketingowe, prawne?</li>
+                    <li data-i18n="engage.probono.li2">Chcesz pomóc w promocji manifestu w mediach społecznościowych?</li>
+                    <li data-i18n="engage.probono.li3">Masz pomysły na rozwój tej inicjatywy lub konkretne działania?</li>
+                    <li data-i18n="engage.probono.li4">Chcesz wesprzeć nas w inny sposób?</li>
+                </ul>
+                <p class="text-center" data-i18n-html="engage.probono.contact">Napisz do nas, jak chciałbyś/chciałabyś się zaangażować: <a href="mailto:mm@elementapp.ai" class="font-semibold hover:underline">mm@elementapp.ai</a></p>
+            </div>
+
+            <div class="mt-8 p-4 bg-white bg-opacity-10 rounded-lg text-center">
+                <h3 class="text-xl font-semibold mb-2" data-i18n="engage.contact.title">Skontaktuj się</h3>
+                <p class="mb-3" data-i18n="engage.contact.desc">Masz pytania, uwagi lub chcesz dowiedzieć się więcej? Napisz do nas!</p>
+                <a href="mailto:mm@elementapp.ai" class="inline-block mt-2 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-1 align-text-bottom" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+                    mm@elementapp.ai
+                </a>
+            </div>
+
+        </section>
+
+        <section id="faq" class="mb-8 p-6 bg-white rounded-lg shadow-md">
+             <h2 class="text-2xl md:text-3xl text-blue-600 mb-6" data-i18n="faq.title">Najczęściej Zadawane Pytania (FAQ)</h2>
+
+             <details id="faq-korupcja">
+                 <summary data-i18n="faq.q1">Dlaczego transparentność władzy jest tak ważna w walce z korupcją?</summary>
+                 <div>
+                     <p data-i18n="faq.a1">Korupcja rozwija się w ukryciu. Pełna transparentność finansów publicznych, głosowań polityków i ich powiązań biznesowych działa jak silny środek odstraszający. Gdy każda złotówka jest śledzona, a każda decyzja jawna, możliwości nadużyć drastycznie maleją. Ułatwia to również obywatelom i mediom kontrolę nad działaniami władzy i pociąganie jej do odpowiedzialności.</p>
+                 </div>
+             </details>
+
+             <details id="faq-techno-optymizm">
+                 <summary data-i18n="faq.q2">Czy techno-optymizm nie ignoruje zagrożeń związanych z technologią?</summary>
+                 <div>
+                     <p data-i18n="faq.a2">Techno-optymizm nie oznacza ślepej wiary w technologię jako panaceum na wszystko i ignorowania ryzyka. Uznajemy, że technologia jest narzędziem, które może być użyte zarówno w dobrym, jak i złym celu. Jednak fundamentalnie wierzymy, że potencjał technologii do rozwiązywania problemów i poprawy ludzkiego losu znacznie przewyższa ryzyko. Zamiast hamować postęp ze strachu, powinniśmy aktywnie kształtować rozwój technologiczny, minimalizować zagrożenia (np. poprzez regulacje, etykę, transparentność – jak postulujemy w tym manifeście) i maksymalizować korzyści dla ludzkości. Pesymizm i bierność prowadzą do stagnacji, podczas gdy optymizm i działanie pozwalają budować lepszą przyszłość.</p>
+                 </div>
+             </details>
+        </section>
+
+        <section id="autor" class="mb-8 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl md:text-3xl text-blue-600 mb-4" data-i18n="author.title">O Autorze Manifestu</h2>
+            <img src="https://placehold.co/100x100/E0E7FF/4F46E5?text=MM" alt="Zdjęcie Macieja Michalewskiego" class="shadow-md">
+            <p class="mb-3"><strong class="text-lg">Maciej Michalewski</strong></p>
+            <p class="mb-3" data-i18n-html="author.p1">Moim pierwszym zawodem był adwokat. Następnie założyłem dwa startupy: pierwszy to agencja rekrutacyjna, a drugi to system automatyzujący procesy rekrutacyjne - <a href="https://elementapp.ai" target="_blank" class="text-blue-600 hover:underline">Element</a>. Od dziecka pasjonuję się nauką, technologią i science-fiction. Od dziecka byłem aktywny sportowo i gamingowo. Oprócz prowadzenia biznesu piszę o HR, technologii i sztucznej inteligencji. Prowadzę również szkolenia z zakresu stosowania i wdrażania AI. Piszę na blogu Element i w newsletterze <a href="https://elementapp.ai/blog" target="_blank" class="text-blue-600 hover:underline">HR & Tech</a>.</p>
+            <p class="mb-3" data-i18n="author.p2">Doświadczenie życiowe, podziw dla świata i życia, sprzeciw wobec korupcji i marnotrawstwa, a w szczególności chęć budowania lepszego jutra dla naszych dzieci, skłoniły mnie do stworzenia tego manifestu. Niech będzie on małą cegiełką w budowaniu świadomości o potrzebie wykorzystania technologii dla dobra ludzkości.</p>
+            <p data-i18n="author.p3">Wizja Cyfrowej Republiki powstała w oparciu o moją wiedzę na temat rozwoju cywilizacji i świata, zamiłowanie do działania oraz potrzebę stworzenia takich ram społecznych, które umożliwią wykorzystanie potencjału technologii w sposób etyczny, transparentny oraz służący poprawie jakości życia wszystkich ludzi.</p>
+        </section>
+
+        <section id="inne-projekty" class="mb-8 p-6 bg-white rounded-lg shadow-md text-center">
+            <h2 class="text-2xl md:text-3xl text-blue-600 mb-4" data-i18n="projects.title">Inne projekty autora</h2>
+            <p class="mb-6 text-gray-600" data-i18n="projects.desc">Poznaj inne inicjatywy Macieja Michalewskiego — od AI i HR Tech po edukację.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <a href="https://elementapp.ai" target="_blank" rel="noopener noreferrer" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                    <h3 class="font-semibold text-blue-800 mb-1">Element</h3>
+                    <p class="text-sm text-gray-600" data-i18n="projects.element">System ATS usprawniający rekrutację przez automatyzację i AI.</p>
+                </a>
+                <a href="https://mmproject.info/brain/" target="_blank" rel="noopener noreferrer" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+                    <h3 class="font-semibold text-purple-800 mb-1">Brain vs AI</h3>
+                    <p class="text-sm text-gray-600" data-i18n="projects.brainvsai">Edukacyjne porównanie mózgu i sieci neuronowych AI.</p>
+                </a>
+                <a href="https://mmproject.info/mm-landing/" target="_blank" rel="noopener noreferrer" class="block p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+                    <h3 class="font-semibold text-green-800 mb-1" data-i18n="projects.portfolio_title">Portfolio</h3>
+                    <p class="text-sm text-gray-600" data-i18n="projects.portfolio">Wszystkie projekty i doświadczenie Macieja w jednym miejscu.</p>
+                </a>
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 text-gray-500 text-sm">
+            <p>&copy; <span id="current-year"></span> The Digital Republic Initiative. <span data-i18n="footer.author">Autor: Maciej Michalewski.</span></p>
+            <p>thedigitalrepublic.org</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // ── i18n ──
+        var I18N = {
+            pl: {
+                "nav.preamble": "Preambuła",
+                "nav.foundations": "Fundamenty",
+                "nav.techno": "Techno-Optymizm",
+                "nav.roadmap": "Plan Działania",
+                "nav.engage": "Zaangażuj się",
+                "nav.author": "O Autorze",
+                "nav.support": "Wesprzyj",
+                "header.title": "Manifest Cyfrowej Republiki",
+                "header.subtitle": "Wizja przyszłości opartej na technologii, transparentności i odpowiedzialności.",
+                "preamble.title": "Preambuła",
+                "preamble.p1": "Żyjemy w erze bezprecedensowego postępu technologicznego. Narzędzia cyfrowe, sztuczna inteligencja i globalna sieć informacyjna mają potencjał, by fundamentalnie zmienić nasze społeczeństwa na lepsze. Niniejszy manifest powstał z potrzeby budowania świadomości i przedstawienia wizji, jak technologia może i powinna wspierać poprawę codziennego życia ludzkości, zwiększać transparentność, wzmacniać odpowiedzialność i chronić wolność jednostki.",
+                "preamble.p2": "Przedstawiamy zarys Cyfrowej Republiki – społeczeństwa opartego na przejrzystości, racjonalności i poszanowaniu praw, gdzie technologia służy obywatelom. Wierzymy, że te zasady mogą i powinny stać się fundamentem lepszej przyszłości.",
+                "preamble.p3": "Wdrożenie zasad tego manifestu stworzy mocne podstawy sprawnego i sprawiedliwego państwa. Można to porównać do budowania silnego organizmu człowieka – z mocnym szkieletem i sprawnymi mięśniami. Takie państwo, niezależnie od obranych celów strategicznych czy politycznych ustrojów, dzięki solidnym fundamentom i zdrowym procesom, będzie efektywniej osiągać swoje cele, z których służba obywatelom jest celem najwyższym.",
+                "cta.preamble": "Podoba Ci się wizja? Wesprzyj naszą misję!",
+                "foundations.title": "Fundamenty Cyfrowej Republiki",
+                "foundations.data.title": "Zarządzanie oparte o dane",
+                "foundations.data.li1": "<strong>Decyzje oparte na faktach:</strong> Dysponujemy technologiami pozwalającymi gromadzić i analizować ogromne ilości danych. Postulujemy, aby dążyć do maksymalnego wykorzystania tych możliwości w procesach decyzyjnych państwa, zwłaszcza na poziomie strategicznym. Decyzje powinny opierać się na rzetelnych danych, modelowaniu i prognozowaniu przy użyciu najlepszych dostępnych systemów przetwarzania informacji i sztucznej inteligencji, a nie na intuicji, ideologii czy partykularnych interesach.",
+                "foundations.data.li2": "<strong>Algorytmiczna decyzyjność i zaufanie:</strong> Uważamy, że podejmowanie decyzji przez transparentne algorytmy, oparte na publicznie dostępnych danych i zorientowane na poprawę życia obywateli, będzie budować zaufanie społeczne. Możliwość mierzenia efektywności tych decyzji również za pomocą danych pozwoli na ich ciągłe doskonalenie. Wraz z rosnącą ilością gromadzonych danych oraz ze wzrostem zaufania, coraz więcej rutynowych i operacyjnych decyzji będzie można powierzać algorytmom, uwalniając ludzki potencjał do zadań nadzorczych.",
+                "foundations.data.li3": "<strong>Otwartość i weryfikacja:</strong> Kluczowe jest zapewnienie wolności tworzenia alternatywnych algorytmów przez obywateli, naukowców czy organizacje pozarządowe. Umożliwi to niezależną weryfikację skuteczności algorytmów stosowanych przez państwo, porównywanie wyników i prowadzenie otwartej debaty publicznej na temat najlepszych rozwiązań – wszystko w oparciu o te same, publicznie dostępne dane.",
+                "foundations.data.li4": "<strong>Kompromisy oparte na danych:</strong> Zdajemy sobie sprawę, że zarządzanie państwem często wymaga trudnych kompromisów, np. między dobrem ogółu a wolnością jednostki. Postulujemy, aby nawet te kompromisy były podejmowane w oparciu o jak najszerszy zakres danych i najlepsze dostępne analizy algorytmiczne, zawsze mając na uwadze nadrzędne cele: dobro ludzkości i poszanowanie podstawowych wolności. Nie opowiadamy się za konkretnym ustrojem politycznym czy predefiniowanymi rozwiązaniami w zakresie praw obywatelskich – interesuje nas proces decyzyjny oparty na danych i dowodach, który pozwoli wybrać najlepszą drogę do realizacji tych celów.",
+                "foundations.freedom.title": "Wolność i Prawa Jednostki",
+                "foundations.freedom.li1": "<strong>Nadrzędność wolności:</strong> Nadrzędną zasadą Cyfrowej Republiki jest dążenie do maksymalnej efektywności zarządzania państwem w kierunku poprawy dobrobytu obywateli, przy jednoczesnym maksymalnym poszanowaniu podstawowych wolności człowieka. Wolność jednostki jest wartością fundamentalną, a jej ograniczenia mogą następować jedynie w wyjątkowych, ściśle określonych prawem sytuacjach, gdy jest to absolutnie konieczne dla ochrony dobra wspólnego lub praw innych osób, i zawsze w sposób transparentny i podlegający kontroli.",
+                "foundations.freedom.li2": "<strong>Bezpieczna Tożsamość Cyfrowa:</strong> Uważamy za potrzebne wprowadzenie powszechnego, ale dobrowolnego i wysoce zabezpieczonego systemu tożsamości cyfrowej, który ułatwi obywatelom bezpieczny dostęp do usług publicznych i prywatnych, głosowań elektronicznych oraz zarządzanie własnymi danymi. Chcemy, aby system ten gwarantował najwyższe standardy ochrony prywatności i bezpieczeństwa.",
+                "foundations.freedom.li3": "<strong>Suwerenność Danych Osobowych:</strong> Chcemy jasnego zdefiniowania praw obywateli do zarządzania własnymi danymi osobowymi, w tym prawa do wglądu, przenoszenia, usuwania i ograniczania przetwarzania danych przez podmioty publiczne i prywatne, z wyjątkiem sytuacji określonych prawem (np. bezpieczeństwo narodowe, egzekwowanie prawa).",
+                "foundations.transparency.title": "Radykalna transparentność i cyfryzacja",
+                "foundations.transparency.intro": 'Na drodze do wdrożenia efektywnego, opartego na danych i algorytmach zarządzania państwem stoi fundamentalna przeszkoda: korupcja i brak transparentności, które są jednymi z największych bolączek współczesnego świata. Jesteśmy przekonani, że najskuteczniejszą bronią w walce z tymi patologiami jest radykalna, wymuszona technologicznie transparentność działań władzy. <a href="#faq-korupcja" class="faq-link" title="Dlaczego transparentność jest kluczowa?"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg><span class="tooltip">Kliknij, aby dowiedzieć się więcej w FAQ</span></a>',
+                "foundations.transparency.li1": "<strong>Cyfryzacja jako podstawa danych:</strong> Postulujemy pełną cyfryzację wszelkich możliwych obszarów działalności państwowej i administracji publicznej. Tylko w ten sposób możliwe będzie efektywne gromadzenie kompleksowych danych niezbędnych do rzetelnej analizy, modelowania, prognozowania oraz późniejszej automatyzacji procesów decyzyjnych i wykonawczych.",
+                "foundations.transparency.li2": "<strong>Przepływy finansowe:</strong> Postulujemy wprowadzenie systemu pełnej, publicznej i natychmiastowej transparentności przepływów finansowych pochodzących z podatków. Chcemy, aby każdy obywatel miał dostęp online do szczegółowych informacji: skąd pochodzą środki, do kogo i jakim tytułem zostały przekazane, w jakim celu, kto podjął decyzję o wydatku, kto ją wykonał oraz jaka była podstawa prawna tej decyzji.",
+                "foundations.transparency.li3": "<strong>Transparentność demokratyczna i partycypacja:</strong> Uważamy, że należy stworzyć łatwo dostępne narzędzia online pozwalające na bieżąco śledzić, jak głosowali przedstawiciele w każdej sprawie, oraz porównywać te głosowania z ich obietnicami. Postulujemy również wdrożenie bezpiecznych systemów głosowania elektronicznego oraz rozwój platform cyfrowych umożliwiających szerszą partycypację obywatelską (konsultacje, panele, budżety partycypacyjne, referenda online).",
+                "foundations.transparency.li4": "<strong>Historia zatrudnienia:</strong> Postulujemy, aby pełna historia zatrudnienia (zarówno w sektorze publicznym, jak i prywatnym) oraz powiązań biznesowych polityków i kluczowych urzędników państwowych była jawna i łatwo weryfikowalna online przez cały okres pełnienia przez nich funkcji publicznych oraz przez określony czas po ich zakończeniu.",
+                "foundations.transparency.li5": "<strong>Szczelność podatkowa:</strong> Chcemy wykorzystać technologię do stworzenia maksymalnie szczelnego systemu podatkowego. Uważamy, że informacje o majątkach i płaconych podatkach (z poszanowaniem uzasadnionej prywatności w zakresie danych wrażliwych niezwiązanych z działalnością publiczną) powinny być w dużym stopniu transparentne, aby zapewnić sprawiedliwość i uniemożliwić ukrywanie dochodów.",
+                "foundations.transparency.li6": "<strong>Automatyzacja i nadzór:</strong> Postulujemy maksymalną automatyzację procesów decyzyjnych i administracyjnych w sektorze publicznym za pomocą algorytmów, w tym AI. Celem jest eliminacja uznaniowości, marnotrawstwa i możliwości korupcyjnych. Kluczowe jest jednak zachowanie pełnej transparentności działania tych algorytmów (ich logiki i kryteriów decyzyjnych) oraz zapewnienie skutecznego ludzkiego nadzoru nad ich funkcjonowaniem. Rola człowieka powinna ewoluować z wykonawcy na kontrolera i audytora systemów automatycznych.",
+                "foundations.transparency.li7": "<strong>Wyjątki:</strong> Akceptujemy, że pełnej transparentności nie będą podlegać projekty czy procesy o kluczowym znaczeniu dla bezpieczeństwa państwa, przy czym zakres i uzasadnienie tajności powinny podlegać ścisłej kontroli organów Państwa.",
+                "cta.foundations": "Zgadzasz się z fundamentami? Wesprzyj naszą misję!",
+                "techno.title": "Technologia w Służbie Ludzkości",
+                "techno.intro": "Wierzymy, że postęp technologiczny jest potężnym narzędziem, które, odpowiednio ukierunkowane, może znacząco przyczynić się do rozwoju cywilizacji i poprawy jakości ludzkiego życia. Podzielamy ducha techno-optymizmu, rozumianego jako wiarę w potencjał technologii do rozwiązywania problemów i tworzenia lepszej przyszłości dla wszystkich, przy jednoczesnym zachowaniu czujności wobec potencjalnych zagrożeń i konieczności etycznego zarządzania jej rozwojem. Nasz optymizm opiera się na następujących przekonaniach:",
+                "techno.li1": "<strong>Wzrost dla Dobrobytu:</strong> Dążymy do dynamicznego rozwoju gospodarczego i technologicznego, ukierunkowanego na zwiększenie dobrobytu ogółu, wydłużenie zdrowego życia, poszerzenie możliwości edukacyjnych i kulturowych oraz eliminację ubóstwa. Odrzucamy ideę stagnacji jako szkodliwą dla ludzkiego potencjału.",
+                "techno.li2": "<strong>Technologia jako Narzędzie Rozwiązań:</strong> Wierzymy w potencjał technologii do rozwiązywania fundamentalnych problemów ludzkości – od chorób i niedostatku, po wyzwania energetyczne i środowiskowe. Technologia nie jest celem sama w sobie, lecz kluczowym narzędziem w służbie ludzkiego postępu i dobrostanu.",
+                "techno.li3": "<strong>Inteligencja i Rynki dla Ludzi:</strong> Uznajemy siłę połączonej inteligencji – ludzkiej i sztucznej – oraz mechanizmów rynkowych jako systemów efektywnego rozwiązywania problemów i alokacji zasobów, pod warunkiem, że służą one społeczeństwu. Wolne, ale odpowiedzialne rynki mogą napędzać innowacje i konkurencję, prowadząc do lepszych i bardziej dostępnych rozwiązań dla wszystkich.",
+                "techno.li4": "<strong>Energia dla Rozwoju:</strong> Dostęp do taniej, czystej i obfitej energii jest kluczowy dla rozwoju cywilizacji i poprawy jakości życia. Popieramy rozwój wszystkich form zrównoważonej energii, w tym energetyki jądrowej nowej generacji, aby zaspokoić rosnące potrzeby świata w sposób przyjazny dla środowiska.",
+                "techno.li5": "<strong>Ambicja Tworzenia Lepszego Świata:</strong> Wzywamy do odwagi, ambicji i chęci budowania przyszłości, w której technologia służy ludzkości. Odrzucamy pesymizm i strach przed zmianą, jednocześnie podkreślając potrzebę odpowiedzialności i przewidywania konsekwencji naszych działań. Przyszłość jest otwarta i zależy od naszej woli tworzenia, odkrywania i mądrego kierowania postępem.",
+                "techno.li6": "<strong>Rozwiązywanie Problemów z Myślą o Człowieku:</strong> Z odpowiednią dozą inteligencji, technologii, kapitału i woli politycznej, ludzkość jest w stanie sprostać każdemu wyzwaniu, o ile celem nadrzędnym pozostaje dobro człowieka i planety.",
+                "cta.techno": "Podzielasz tego ducha? Wesprzyj naszą misję!",
+                "roadmap.title": "Plan Działania",
+                "roadmap.intro": "Realizacja wizji Cyfrowej Republiki wymaga świadomości, debaty i zaangażowania. Poniżej przedstawiamy naszą roadmapę, która nakreśla najbliższe kroki w dążeniu do tego celu. Początek naszej drogi zaczynamy od własnej transparentności, zbierania datków na wsparcie projetku i budowanie System Transparentności Politycznej",
+                "roadmap.phase0.title": "Faza 0: Fundamenty i Wzrost Organiczny",
+                "roadmap.phase0.desc": "Dopracowanie manifestu i strony (FAQ, Słownik, Newsletter). SEO. Uruchomienie profili w mediach społecznościowych. Promocja przez istniejące kanały autora. Budowanie listy mailingowej. Kontakty z sojusznikami/wolontariuszami. Rozpoczęcie zbierania środków na promocję manifestu (przycisk dotacji).",
+                "roadmap.phase0.goal": "Cel: Zbudowanie publiczności, test przekazu, zebranie opinii i małych donacji, infrastruktura online.",
+                "roadmap.phase1.title": "Faza 1: Budowa Systemu Transparentności Finansowej",
+                "roadmap.phase1.desc": "Wykorzystanie zebranych środków na stworzenie mechanizmu automatycznego raportowania na stronie manifestu wszystkich datków i wydatków Manifestu. Przeznaczanie środków na promocję manifestu w celu zaangażowania społeczności i zwiększenia liczby wpłat.",
+                "roadmap.phase1.goal": "Cel: Wdrożenie transparentności finansowej, budowanie zaufania, dalszy wzrost zasięgu.",
+                "roadmap.phase2.title": "Faza 2: Uruchomienie Systemu Transparentności Finansowej i Skalowanie",
+                "roadmap.phase2.desc": "Uruchmoenie w pełni automatycznego raportowania wpłat i wydadatków Manifestu. Ciągłe finansowanie kampanii marketingowej Manifestu. Aplikowanie o granty. Organizowanie kampanii crowdfundingowych. Skalowanie projektu w skali globalnej.",
+                "roadmap.phase2.goal": "Cel: Budowanie wiarygodności. Zwiększenie zasięgu, pozyskanie środków na kolejne etapy rozwoju.",
+                "roadmap.phase3.title": "Faza 3: Budowa Systemu Transparentności Politycznej",
+                "roadmap.phase3.desc": "Rozwój MVP (Minimum Viable Product) narzędzi do automatycznego monitoringu i weryfikacji zgodności działań polityków z ich deklaracjami oraz z postulatami Manifestu.",
+                "roadmap.phase3.goal": "Cel: Dostarczenie pierwszych działających narzędzi weryfikacyjnych, dalsze pozyskiwanie funduszy.",
+                "roadmap.phase4.title": "Faza 4: Uruchomienie i MVP Systemu Transparentności Politycznej",
+                "roadmap.phase4.desc": "Rozbudowa platformy i narzędzi weryfikacyjnych. Dalsze skalowanie działań marketingowych Manifestu. Rozważenie wsparcia dla zgodnych ideowo aktorów politycznych. Budowanie partnerstw strategicznych.",
+                "roadmap.phase4.goal": "Cel: Uruchomienie MVP, wpływ na debatę publiczną, skalowanie projektu.",
+                "engage.title": "Zaangażuj się!",
+                "engage.intro": "Jeśli zgadzasz się z przedstawionymi postulatami i wierzysz, że technologia może budować lepsze, bardziej transparentne i sprawiedliwe społeczeństwo, dołącz do nas!",
+                "engage.support.title": "Twoje Wsparcie Ma Znaczenie!",
+                "engage.support.subtitle": "Pomóż nam budować zasięg i realizować kolejne fazy roadmapy!",
+                "engage.support.transparency": "Zobowiązujemy się do pełnej transparentności – do czasu uruchomienia automatycznego systemu raportowania (Faza 1 roadmapy), wszystkie datki i wydatki będą raportowane ręcznie w naszym newsletterze. Po uruchomieniu systemu, raportowanie będzie automatyczne i publicznie dostępne na tej stronie.",
+                "engage.support.stripe_hint": "(Kliknij przycisk, aby bezpiecznie przekazać darowiznę przez Stripe)",
+                "engage.probono.title": "Jak możesz pomóc pro bono?",
+                "engage.probono.subtitle": "Twoje umiejętności, czas i pomysły są równie cenne!",
+                "engage.probono.li1": "Masz umiejętności programistyczne, graficzne, marketingowe, prawne?",
+                "engage.probono.li2": "Chcesz pomóc w promocji manifestu w mediach społecznościowych?",
+                "engage.probono.li3": "Masz pomysły na rozwój tej inicjatywy lub konkretne działania?",
+                "engage.probono.li4": "Chcesz wesprzeć nas w inny sposób?",
+                "engage.probono.contact": 'Napisz do nas, jak chciałbyś/chciałabyś się zaangażować: <a href="mailto:mm@elementapp.ai" class="font-semibold hover:underline">mm@elementapp.ai</a>',
+                "engage.contact.title": "Skontaktuj się",
+                "engage.contact.desc": "Masz pytania, uwagi lub chcesz dowiedzieć się więcej? Napisz do nas!",
+                "projects.title": "Inne projekty autora",
+                "projects.desc": "Poznaj inne inicjatywy Macieja Michalewskiego — od AI i HR Tech po edukację.",
+                "projects.element": "System ATS usprawniający rekrutację przez automatyzację i AI.",
+                "projects.brainvsai": "Edukacyjne porównanie mózgu i sieci neuronowych AI.",
+                "projects.portfolio_title": "Portfolio",
+                "projects.portfolio": "Wszystkie projekty i doświadczenie Macieja w jednym miejscu.",
+                "faq.title": "Najczęściej Zadawane Pytania (FAQ)",
+                "faq.q1": "Dlaczego transparentność władzy jest tak ważna w walce z korupcją?",
+                "faq.a1": "Korupcja rozwija się w ukryciu. Pełna transparentność finansów publicznych, głosowań polityków i ich powiązań biznesowych działa jak silny środek odstraszający. Gdy każda złotówka jest śledzona, a każda decyzja jawna, możliwości nadużyć drastycznie maleją. Ułatwia to również obywatelom i mediom kontrolę nad działaniami władzy i pociąganie jej do odpowiedzialności.",
+                "faq.q2": "Czy techno-optymizm nie ignoruje zagrożeń związanych z technologią?",
+                "faq.a2": "Techno-optymizm nie oznacza ślepej wiary w technologię jako panaceum na wszystko i ignorowania ryzyka. Uznajemy, że technologia jest narzędziem, które może być użyte zarówno w dobrym, jak i złym celu. Jednak fundamentalnie wierzymy, że potencjał technologii do rozwiązywania problemów i poprawy ludzkiego losu znacznie przewyższa ryzyko. Zamiast hamować postęp ze strachu, powinniśmy aktywnie kształtować rozwój technologiczny, minimalizować zagrożenia (np. poprzez regulacje, etykę, transparentność – jak postulujemy w tym manifeście) i maksymalizować korzyści dla ludzkości. Pesymizm i bierność prowadzą do stagnacji, podczas gdy optymizm i działanie pozwalają budować lepszą przyszłość.",
+                "author.title": "O Autorze Manifestu",
+                "author.p1": 'Moim pierwszym zawodem był adwokat. Następnie założyłem dwa startupy: pierwszy to agencja rekrutacyjna, a drugi to system automatyzujący procesy rekrutacyjne - <a href="https://elementapp.ai" target="_blank" class="text-blue-600 hover:underline">Element</a>. Od dziecka pasjonuję się nauką, technologią i science-fiction. Od dziecka byłem aktywny sportowo i gamingowo. Oprócz prowadzenia biznesu piszę o HR, technologii i sztucznej inteligencji. Prowadzę również szkolenia z zakresu stosowania i wdrażania AI. Piszę na blogu Element i w newsletterze <a href="https://elementapp.ai/blog" target="_blank" class="text-blue-600 hover:underline">HR & Tech</a>.',
+                "author.p2": "Doświadczenie życiowe, podziw dla świata i życia, sprzeciw wobec korupcji i marnotrawstwa, a w szczególności chęć budowania lepszego jutra dla naszych dzieci, skłoniły mnie do stworzenia tego manifestu. Niech będzie on małą cegiełką w budowaniu świadomości o potrzebie wykorzystania technologii dla dobra ludzkości.",
+                "author.p3": "Wizja Cyfrowej Republiki powstała w oparciu o moją wiedzę na temat rozwoju cywilizacji i świata, zamiłowanie do działania oraz potrzebę stworzenia takich ram społecznych, które umożliwią wykorzystanie potencjału technologii w sposób etyczny, transparentny oraz służący poprawie jakości życia wszystkich ludzi.",
+                "cta.author": "Chcesz pomóc w realizacji tej wizji? Wesprzyj!",
+                "footer.author": "Autor: Maciej Michalewski.",
+                "tooltip.faq": "Kliknij, aby dowiedzieć się więcej w FAQ"
+            },
+            en: {
+                "nav.preamble": "Preamble",
+                "nav.foundations": "Foundations",
+                "nav.techno": "Techno-Optimism",
+                "nav.roadmap": "Roadmap",
+                "nav.engage": "Get Involved",
+                "nav.author": "About the Author",
+                "nav.support": "Support Us",
+                "header.title": "The Digital Republic Manifesto",
+                "header.subtitle": "A vision of the future built on technology, transparency, and accountability.",
+                "preamble.title": "Preamble",
+                "preamble.p1": "We live in an era of unprecedented technological progress. Digital tools, artificial intelligence, and the global information network have the potential to fundamentally change our societies for the better. This manifesto was born out of the need to raise awareness and present a vision of how technology can and should support the improvement of everyday human life, increase transparency, strengthen accountability, and protect individual freedom.",
+                "preamble.p2": "We present an outline of the Digital Republic \u2013 a society based on transparency, rationality, and respect for rights, where technology serves citizens. We believe these principles can and should become the foundation of a better future.",
+                "preamble.p3": "Implementing the principles of this manifesto will create a strong foundation for an efficient and just state. It can be compared to building a strong human body \u2013 with a solid skeleton and well-functioning muscles. Such a state, regardless of its strategic goals or political systems, will more effectively achieve its objectives thanks to solid foundations and healthy processes, with serving citizens being the highest goal.",
+                "cta.preamble": "Like the vision? Support our mission!",
+                "foundations.title": "Foundations of the Digital Republic",
+                "foundations.data.title": "Data-Driven Governance",
+                "foundations.data.li1": "<strong>Evidence-based decisions:</strong> We have technologies that allow us to collect and analyze vast amounts of data. We advocate for maximizing the use of these capabilities in state decision-making processes, especially at the strategic level. Decisions should be based on reliable data, modeling, and forecasting using the best available information processing systems and artificial intelligence, rather than on intuition, ideology, or vested interests.",
+                "foundations.data.li2": "<strong>Algorithmic decision-making and trust:</strong> We believe that making decisions through transparent algorithms, based on publicly available data and oriented toward improving citizens' lives, will build social trust. The ability to measure the effectiveness of these decisions also through data will allow for their continuous improvement. As the amount of collected data grows and trust increases, more and more routine and operational decisions can be entrusted to algorithms, freeing human potential for supervisory tasks.",
+                "foundations.data.li3": "<strong>Openness and verification:</strong> It is crucial to ensure the freedom to create alternative algorithms by citizens, scientists, or non-governmental organizations. This will enable independent verification of the effectiveness of algorithms used by the state, comparison of results, and open public debate on the best solutions \u2013 all based on the same publicly available data.",
+                "foundations.data.li4": "<strong>Data-based compromises:</strong> We recognize that governing a state often requires difficult compromises, e.g., between the common good and individual freedom. We advocate that even these compromises be made based on the widest possible range of data and the best available algorithmic analyses, always keeping in mind the overarching goals: the good of humanity and respect for fundamental freedoms. We do not advocate for a specific political system or predefined solutions regarding civil rights \u2013 we are interested in a decision-making process based on data and evidence that will allow choosing the best path to achieve these goals.",
+                "foundations.freedom.title": "Individual Freedom and Rights",
+                "foundations.freedom.li1": "<strong>Primacy of freedom:</strong> The overarching principle of the Digital Republic is striving for maximum efficiency in state governance toward improving citizens' well-being, while maximally respecting fundamental human freedoms. Individual freedom is a fundamental value, and its limitations may occur only in exceptional, strictly legally defined situations, when absolutely necessary for the protection of the common good or the rights of others, and always in a transparent manner subject to oversight.",
+                "foundations.freedom.li2": "<strong>Secure Digital Identity:</strong> We consider it necessary to introduce a universal but voluntary and highly secured digital identity system that will facilitate citizens' secure access to public and private services, electronic voting, and management of their own data. We want this system to guarantee the highest standards of privacy and security protection.",
+                "foundations.freedom.li3": "<strong>Personal Data Sovereignty:</strong> We want a clear definition of citizens' rights to manage their personal data, including the right to access, transfer, delete, and restrict data processing by public and private entities, except in situations defined by law (e.g., national security, law enforcement).",
+                "foundations.transparency.title": "Radical Transparency and Digitization",
+                "foundations.transparency.intro": 'On the path to implementing effective, data-driven and algorithm-based state governance stands a fundamental obstacle: corruption and lack of transparency, which are among the greatest afflictions of the modern world. We are convinced that the most effective weapon in fighting these pathologies is radical, technologically enforced transparency of government actions. <a href="#faq-korupcja" class="faq-link" title="Why is transparency crucial?"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg><span class="tooltip">Click to learn more in FAQ</span></a>',
+                "foundations.transparency.li1": "<strong>Digitization as the foundation of data:</strong> We advocate for full digitization of all possible areas of state and public administration activities. Only in this way will it be possible to effectively collect comprehensive data necessary for reliable analysis, modeling, forecasting, and subsequent automation of decision-making and executive processes.",
+                "foundations.transparency.li2": "<strong>Financial flows:</strong> We advocate for the introduction of a system of full, public, and immediate transparency of financial flows from taxes. We want every citizen to have online access to detailed information: where the funds come from, to whom and for what reason they were transferred, for what purpose, who made the spending decision, who executed it, and what was the legal basis for that decision.",
+                "foundations.transparency.li3": "<strong>Democratic transparency and participation:</strong> We believe that easily accessible online tools should be created to track in real-time how representatives voted on every issue, and to compare these votes with their promises. We also advocate for the implementation of secure electronic voting systems and the development of digital platforms enabling broader civic participation (consultations, panels, participatory budgets, online referendums).",
+                "foundations.transparency.li4": "<strong>Employment history:</strong> We advocate that the full employment history (both in the public and private sectors) and business connections of politicians and key state officials be public and easily verifiable online throughout the entire period of their public service and for a specified time after its conclusion.",
+                "foundations.transparency.li5": "<strong>Tax compliance:</strong> We want to use technology to create a maximally tight tax system. We believe that information about assets and taxes paid (while respecting justified privacy regarding sensitive data unrelated to public activity) should be largely transparent to ensure fairness and prevent income concealment.",
+                "foundations.transparency.li6": "<strong>Automation and oversight:</strong> We advocate for maximum automation of decision-making and administrative processes in the public sector using algorithms, including AI. The goal is to eliminate discretion, waste, and corruption opportunities. However, it is crucial to maintain full transparency of how these algorithms work (their logic and decision criteria) and to ensure effective human oversight of their operation. The role of humans should evolve from executors to controllers and auditors of automated systems.",
+                "foundations.transparency.li7": "<strong>Exceptions:</strong> We accept that full transparency will not apply to projects or processes of key importance to state security, while the scope and justification of secrecy should be subject to strict oversight by State authorities.",
+                "cta.foundations": "Agree with the foundations? Support our mission!",
+                "techno.title": "Technology in the Service of Humanity",
+                "techno.intro": "We believe that technological progress is a powerful tool that, properly directed, can significantly contribute to the development of civilization and improvement of human quality of life. We share the spirit of techno-optimism, understood as faith in the potential of technology to solve problems and create a better future for all, while remaining vigilant about potential threats and the need for ethical management of its development. Our optimism is based on the following beliefs:",
+                "techno.li1": "<strong>Growth for Prosperity:</strong> We strive for dynamic economic and technological development, aimed at increasing overall prosperity, extending healthy life, expanding educational and cultural opportunities, and eliminating poverty. We reject the idea of stagnation as harmful to human potential.",
+                "techno.li2": "<strong>Technology as a Tool for Solutions:</strong> We believe in the potential of technology to solve fundamental human problems \u2013 from diseases and scarcity to energy and environmental challenges. Technology is not an end in itself, but a key tool in the service of human progress and well-being.",
+                "techno.li3": "<strong>Intelligence and Markets for People:</strong> We recognize the power of combined intelligence \u2013 human and artificial \u2013 and market mechanisms as systems for efficiently solving problems and allocating resources, provided they serve society. Free but responsible markets can drive innovation and competition, leading to better and more accessible solutions for all.",
+                "techno.li4": "<strong>Energy for Development:</strong> Access to cheap, clean, and abundant energy is crucial for the development of civilization and improvement of quality of life. We support the development of all forms of sustainable energy, including next-generation nuclear power, to meet the growing needs of the world in an environmentally friendly way.",
+                "techno.li5": "<strong>Ambition to Create a Better World:</strong> We call for courage, ambition, and the desire to build a future where technology serves humanity. We reject pessimism and fear of change, while emphasizing the need for responsibility and foresight regarding the consequences of our actions. The future is open and depends on our will to create, discover, and wisely guide progress.",
+                "techno.li6": "<strong>Solving Problems with People in Mind:</strong> With the right amount of intelligence, technology, capital, and political will, humanity is capable of meeting any challenge, as long as the overarching goal remains the good of people and the planet.",
+                "cta.techno": "Share this spirit? Support our mission!",
+                "roadmap.title": "Roadmap",
+                "roadmap.intro": "Realizing the vision of the Digital Republic requires awareness, debate, and engagement. Below we present our roadmap outlining the next steps toward this goal. We begin our journey with our own transparency, collecting donations to support the project, and building a Political Transparency System.",
+                "roadmap.phase0.title": "Phase 0: Foundations and Organic Growth",
+                "roadmap.phase0.desc": "Refining the manifesto and website (FAQ, Glossary, Newsletter). SEO. Launching social media profiles. Promotion through the author's existing channels. Building a mailing list. Reaching out to allies/volunteers. Starting to collect funds for manifesto promotion (donation button).",
+                "roadmap.phase0.goal": "Goal: Build an audience, test messaging, collect feedback and small donations, online infrastructure.",
+                "roadmap.phase1.title": "Phase 1: Building the Financial Transparency System",
+                "roadmap.phase1.desc": "Using collected funds to create an automatic reporting mechanism on the manifesto website for all donations and expenses. Allocating funds for manifesto promotion to engage the community and increase donations.",
+                "roadmap.phase1.goal": "Goal: Implement financial transparency, build trust, further grow reach.",
+                "roadmap.phase2.title": "Phase 2: Launching the Financial Transparency System and Scaling",
+                "roadmap.phase2.desc": "Launching fully automated reporting of donations and expenses. Continuous funding of manifesto marketing campaigns. Applying for grants. Organizing crowdfunding campaigns. Scaling the project globally.",
+                "roadmap.phase2.goal": "Goal: Building credibility. Increasing reach, securing funds for further development stages.",
+                "roadmap.phase3.title": "Phase 3: Building the Political Transparency System",
+                "roadmap.phase3.desc": "Developing an MVP (Minimum Viable Product) of tools for automatic monitoring and verification of politicians' actions against their declarations and the Manifesto's postulates.",
+                "roadmap.phase3.goal": "Goal: Deliver the first working verification tools, continue fundraising.",
+                "roadmap.phase4.title": "Phase 4: Launching the Political Transparency System MVP",
+                "roadmap.phase4.desc": "Expanding the platform and verification tools. Further scaling manifesto marketing efforts. Considering support for ideologically aligned political actors. Building strategic partnerships.",
+                "roadmap.phase4.goal": "Goal: Launch MVP, influence public debate, scale the project.",
+                "engage.title": "Get Involved!",
+                "engage.intro": "If you agree with the presented postulates and believe that technology can build a better, more transparent, and just society, join us!",
+                "engage.support.title": "Your Support Matters!",
+                "engage.support.subtitle": "Help us build reach and realize the next phases of the roadmap!",
+                "engage.support.transparency": "We commit to full transparency \u2013 until the launch of the automatic reporting system (Phase 1 of the roadmap), all donations and expenses will be reported manually in our newsletter. After the system launches, reporting will be automatic and publicly available on this website.",
+                "engage.support.stripe_hint": "(Click the button to securely make a donation via Stripe)",
+                "engage.probono.title": "How can you help pro bono?",
+                "engage.probono.subtitle": "Your skills, time, and ideas are equally valuable!",
+                "engage.probono.li1": "Do you have programming, graphic design, marketing, or legal skills?",
+                "engage.probono.li2": "Want to help promote the manifesto on social media?",
+                "engage.probono.li3": "Do you have ideas for developing this initiative or specific actions?",
+                "engage.probono.li4": "Want to support us in another way?",
+                "engage.probono.contact": 'Tell us how you would like to get involved: <a href="mailto:mm@elementapp.ai" class="font-semibold hover:underline">mm@elementapp.ai</a>',
+                "engage.contact.title": "Get in Touch",
+                "engage.contact.desc": "Have questions, comments, or want to learn more? Write to us!",
+                "projects.title": "Other Projects by the Author",
+                "projects.desc": "Explore other initiatives by Maciej Michalewski — from AI and HR Tech to education.",
+                "projects.element": "An ATS system streamlining recruitment through automation and AI.",
+                "projects.brainvsai": "An educational comparison of the brain and AI neural networks.",
+                "projects.portfolio_title": "Portfolio",
+                "projects.portfolio": "All of Maciej's projects and experience in one place.",
+                "faq.title": "Frequently Asked Questions (FAQ)",
+                "faq.q1": "Why is government transparency so important in the fight against corruption?",
+                "faq.a1": "Corruption thrives in secrecy. Full transparency of public finances, politicians' votes, and their business connections acts as a strong deterrent. When every dollar is tracked and every decision is public, the opportunities for abuse drastically decrease. It also makes it easier for citizens and the media to monitor government actions and hold it accountable.",
+                "faq.q2": "Doesn't techno-optimism ignore the threats associated with technology?",
+                "faq.a2": "Techno-optimism does not mean blind faith in technology as a panacea for everything and ignoring risks. We acknowledge that technology is a tool that can be used for both good and bad purposes. However, we fundamentally believe that the potential of technology to solve problems and improve human destiny far outweighs the risks. Instead of slowing down progress out of fear, we should actively shape technological development, minimize threats (e.g., through regulations, ethics, transparency \u2013 as we advocate in this manifesto) and maximize the benefits for humanity. Pessimism and passivity lead to stagnation, while optimism and action allow us to build a better future.",
+                "author.title": "About the Author",
+                "author.p1": 'My first profession was a lawyer. Then I founded two startups: the first was a recruitment agency, and the second was a system automating recruitment processes \u2013 <a href="https://elementapp.ai" target="_blank" class="text-blue-600 hover:underline">Element</a>. Since childhood, I have been passionate about science, technology, and science fiction. I have always been active in sports and gaming. In addition to running a business, I write about HR, technology, and artificial intelligence. I also conduct training on the application and implementation of AI. I write on the Element blog and in the <a href="https://elementapp.ai/blog" target="_blank" class="text-blue-600 hover:underline">HR & Tech</a> newsletter.',
+                "author.p2": "Life experience, admiration for the world and life, opposition to corruption and waste, and especially the desire to build a better tomorrow for our children, led me to create this manifesto. Let it be a small contribution to raising awareness about the need to use technology for the good of humanity.",
+                "author.p3": "The vision of the Digital Republic was created based on my knowledge of the development of civilization and the world, a love of action, and the need to create social frameworks that will enable the use of technology's potential in an ethical, transparent manner that serves to improve the quality of life for all people.",
+                "cta.author": "Want to help realize this vision? Support us!",
+                "footer.author": "Author: Maciej Michalewski.",
+                "tooltip.faq": "Click to learn more in FAQ"
+            }
+        };
+
+        var activeLocale = "pl";
+
+        function getInitialLocale() {
+            var urlLang = new URLSearchParams(window.location.search).get("lang");
+            if (urlLang === "pl" || urlLang === "en") return urlLang;
+            var saved = localStorage.getItem("dr_lang");
+            if (saved === "pl" || saved === "en") return saved;
+            var browserLang = (navigator.language || "").slice(0, 2).toLowerCase();
+            return browserLang === "pl" ? "pl" : "en";
+        }
+
+        function applyTranslations(lang) {
+            activeLocale = lang;
+            localStorage.setItem("dr_lang", lang);
+            document.documentElement.lang = lang;
+
+            // Update page title
+            document.title = lang === "en"
+                ? "The Digital Republic Manifesto - TheDigitalRepublic.org"
+                : "Manifest Cyfrowej Republiki - TheDigitalRepublic.org";
+
+            var dict = I18N[lang];
+
+            // data-i18n → textContent
+            document.querySelectorAll("[data-i18n]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n");
+                if (dict[key] !== undefined) el.textContent = dict[key];
+            });
+
+            // data-i18n-html → innerHTML
+            document.querySelectorAll("[data-i18n-html]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n-html");
+                if (dict[key] !== undefined) el.innerHTML = dict[key];
+            });
+
+            // Update switcher UI
+            document.querySelectorAll("#lang-switcher .lang-opt").forEach(function(btn) {
+                btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+            });
+
+            // Re-bind FAQ links after innerHTML swap
+            bindFaqLinks();
+        }
+
+        // Language switcher
+        document.getElementById("lang-switcher").addEventListener("click", function(e) {
+            var opt = e.target.closest(".lang-opt");
+            if (!opt) return;
+            var lang = opt.getAttribute("data-lang");
+            if (lang && lang !== activeLocale) applyTranslations(lang);
+        });
+
+        // FAQ link handler
+        function bindFaqLinks() {
+            document.querySelectorAll('a.faq-link').forEach(function(link) {
+                link.removeEventListener('click', handleFaqClick);
+                link.addEventListener('click', handleFaqClick);
+            });
+        }
+
+        function handleFaqClick(event) {
+            event.preventDefault();
+            var targetId = this.getAttribute('href').substring(1);
+            var targetElement = document.getElementById(targetId);
+            if (targetElement && targetElement.tagName === 'DETAILS') {
+                targetElement.open = true;
+            }
+            var el = targetElement || document.getElementById(targetId);
+            if (el) {
+                var navHeight = document.querySelector('nav').offsetHeight;
+                var elementPosition = el.getBoundingClientRect().top;
+                var offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            }
+        }
+
+        // Init
+        applyTranslations(getInitialLocale());
+    </script>
+
+</body>
+</html>
