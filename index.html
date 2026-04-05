@@ -234,7 +234,7 @@
             <a href="#fundamenty" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.foundations">Fundamenty</a>
             <a href="#techno-optymizm" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.techno">Techno-Optymizm</a>
             <a href="#plan-dzialania" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.roadmap" style="display:none">Plan Działania</a>
-            <a href="#wezwanie" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.engage">Zaangażuj się</a>
+            <a href="#wezwanie" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.engage">Kontakt</a>
             <a href="#faq" class="text-gray-700 hover:text-blue-600 font-medium">FAQ</a>
             <a href="#autor" class="text-gray-700 hover:text-blue-600 font-medium" data-i18n="nav.author">O Autorze</a>
             <button class="lang-switcher" id="lang-switcher" aria-label="Switch language">
@@ -397,31 +397,34 @@
             </div>
         </section>
 
-        <section id="wezwanie" class="mb-8 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg">
-            <h2 class="text-2xl md:text-3xl mb-4 font-bold" data-i18n="engage.title">Zaangażuj się!</h2>
-            <p class="mb-6" data-i18n="engage.intro">Jeśli zgadzasz się z przedstawionymi postulatami i wierzysz, że technologia może budować lepsze, bardziej transparentne i sprawiedliwe społeczeństwo, dołącz do mnie!</p>
-
+        <!-- Old "Zaangażuj się" section hidden for potential future use -->
+        <section id="wezwanie-old" class="mb-8 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg" style="display:none">
+            <h2 class="text-2xl md:text-3xl mb-4 font-bold">Zaangażuj się!</h2>
+            <p class="mb-6">Jeśli zgadzasz się z przedstawionymi postulatami i wierzysz, że technologia może budować lepsze, bardziej transparentne i sprawiedliwe społeczeństwo, dołącz do mnie!</p>
             <div class="mb-8 p-4 bg-white bg-opacity-10 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2 text-center" data-i18n="engage.probono.title">Jak możesz pomóc pro bono?</h3>
-                <p class="text-center mb-3" data-i18n="engage.probono.subtitle">Twoje umiejętności, czas i pomysły są równie cenne!</p>
+                <h3 class="text-xl font-semibold mb-2 text-center">Jak możesz pomóc pro bono?</h3>
+                <p class="text-center mb-3">Twoje umiejętności, czas i pomysły są równie cenne!</p>
                 <ul class="list-disc space-y-1 ml-6 mb-4 text-sm opacity-90">
-                    <li data-i18n="engage.probono.li1">Masz umiejętności programistyczne, graficzne, marketingowe, prawne?</li>
-                    <li data-i18n="engage.probono.li2">Chcesz pomóc w promocji manifestu w mediach społecznościowych?</li>
-                    <li data-i18n="engage.probono.li3">Masz pomysły na rozwój tej inicjatywy lub konkretne działania?</li>
-                    <li data-i18n="engage.probono.li4">Chcesz wesprzeć mnie w inny sposób?</li>
+                    <li>Masz umiejętności programistyczne, graficzne, marketingowe, prawne?</li>
+                    <li>Chcesz pomóc w promocji manifestu w mediach społecznościowych?</li>
+                    <li>Masz pomysły na rozwój tej inicjatywy lub konkretne działania?</li>
+                    <li>Chcesz wesprzeć mnie w inny sposób?</li>
                 </ul>
-                <p class="text-center" data-i18n-html="engage.probono.contact">Napisz do mnie, jak chciałbyś/chciałabyś się zaangażować: <a href="mailto:mm@elementapp.ai" class="font-semibold hover:underline">mm@elementapp.ai</a></p>
+                <p class="text-center">Napisz do mnie, jak chciałbyś/chciałabyś się zaangażować: <a href="mailto:mm@elementapp.ai" class="font-semibold hover:underline">mm@elementapp.ai</a></p>
             </div>
-
             <div class="mt-8 p-4 bg-white bg-opacity-10 rounded-lg text-center">
-                <h3 class="text-xl font-semibold mb-2" data-i18n="engage.contact.title">Skontaktuj się</h3>
-                <p class="mb-3" data-i18n="engage.contact.desc">Masz pytania, uwagi lub chcesz dowiedzieć się więcej? Napisz do mnie!</p>
-                <a href="mailto:mm@elementapp.ai" class="inline-block mt-2 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-1 align-text-bottom" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
-                    mm@elementapp.ai
-                </a>
+                <h3 class="text-xl font-semibold mb-2">Skontaktuj się</h3>
+                <p class="mb-3">Masz pytania, uwagi lub chcesz dowiedzieć się więcej? Napisz do mnie!</p>
+                <a href="mailto:mm@elementapp.ai" class="inline-block mt-2 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">mm@elementapp.ai</a>
             </div>
+        </section>
 
+        <section id="wezwanie" class="mb-8 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg text-center">
+            <p class="text-lg mb-4" data-i18n-html="engage.simple">Jeśli masz pomysł na nagłośnienie tego manifestu lub jego rozwój, napisz do mnie:</p>
+            <a href="mailto:mm@elementapp.ai" class="inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-1 align-text-bottom" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+                mm@elementapp.ai
+            </a>
         </section>
 
         <section id="faq" class="mb-8 p-6 bg-white rounded-lg shadow-md">
@@ -494,7 +497,7 @@
                 "nav.foundations": "Fundamenty",
                 "nav.techno": "Techno-Optymizm",
                 "nav.roadmap": "Plan Działania",
-                "nav.engage": "Zaangażuj się",
+                "nav.engage": "Kontakt",
                 "nav.author": "O Autorze",
                 "nav.support": "Wesprzyj",
                 "header.title": "Manifest Cyfrowej Republiki",
@@ -578,6 +581,7 @@
                 "roadmap.phase4.goal": "Cel: Uruchomienie MVP, wpływ na debatę publiczną, skalowanie projektu.",
                 "engage.title": "Zaangażuj się!",
                 "engage.intro": "Jeśli zgadzasz się z przedstawionymi postulatami i wierzysz, że technologia może budować lepsze, bardziej transparentne i sprawiedliwe społeczeństwo, dołącz do mnie!",
+                "engage.simple": "Jeśli masz pomysł na nagłośnienie tego manifestu lub jego rozwój, napisz do mnie:",
                 "engage.support.title": "Twoje Wsparcie Ma Znaczenie!",
                 "engage.support.subtitle": "Pomóż mi budować zasięg i realizować kolejne fazy roadmapy!",
                 "engage.support.transparency": "Zobowiązuję się do pełnej transparentności – do czasu uruchomienia automatycznego systemu raportowania (Faza 1 roadmapy), wszystkie datki i wydatki będą raportowane ręcznie w moim newsletterze. Po uruchomieniu systemu, raportowanie będzie automatyczne i publicznie dostępne na tej stronie.",
@@ -617,7 +621,7 @@
                 "nav.foundations": "Foundations",
                 "nav.techno": "Techno-Optimism",
                 "nav.roadmap": "Roadmap",
-                "nav.engage": "Get Involved",
+                "nav.engage": "Contact",
                 "nav.author": "About the Author",
                 "nav.support": "Support",
                 "header.title": "The Digital Republic Manifesto",
@@ -701,6 +705,7 @@
                 "roadmap.phase4.goal": "Goal: Launch MVP, influence public debate, scale the project.",
                 "engage.title": "Get Involved!",
                 "engage.intro": "If you agree with the presented postulates and believe that technology can build a better, more transparent, and just society, join me!",
+                "engage.simple": "If you have an idea for promoting this manifesto or contributing to its development, write to me:",
                 "engage.support.title": "Your Support Matters!",
                 "engage.support.subtitle": "Help me build reach and realize the next phases of the roadmap!",
                 "engage.support.transparency": "I commit to full transparency \u2013 until the launch of the automatic reporting system (Phase 1 of the roadmap), all donations and expenses will be reported manually in my newsletter. After the system launches, reporting will be automatic and publicly available on this website.",
