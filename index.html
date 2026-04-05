@@ -788,12 +788,21 @@
             bindFaqLinks();
         }
 
-        // Language switcher
+        // Language switcher — navigate to /en/ or / for clean URLs
         document.getElementById("lang-switcher").addEventListener("click", function(e) {
             var opt = e.target.closest(".lang-opt");
             if (!opt) return;
             var lang = opt.getAttribute("data-lang");
-            if (lang && lang !== activeLocale) applyTranslations(lang);
+            if (lang && lang !== activeLocale) {
+                var isEn = window.location.pathname.indexOf("/en") !== -1;
+                if (lang === "en" && !isEn) {
+                    window.location.href = "/en/";
+                } else if (lang === "pl" && isEn) {
+                    window.location.href = "/";
+                } else {
+                    applyTranslations(lang);
+                }
+            }
         });
 
         // FAQ link handler
