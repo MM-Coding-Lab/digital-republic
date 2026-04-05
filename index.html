@@ -745,6 +745,8 @@
         var activeLocale = "pl";
 
         function getInitialLocale() {
+            // /en/ path forces English
+            if (window.location.pathname.indexOf("/en") !== -1) return "en";
             var urlLang = new URLSearchParams(window.location.search).get("lang");
             if (urlLang === "pl" || urlLang === "en") return urlLang;
             var saved = localStorage.getItem("dr_lang");
