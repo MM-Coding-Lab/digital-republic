@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manifest Cyfrowej Republiki - TheDigitalRepublic.org</title>
+    <meta name="description" content="Manifest Cyfrowej Republiki — wizja państwa opartego na danych, transparentności i odpowiedzialności. Jak technologia i AI mogą służyć obywatelom, ograniczać korupcję i wzmacniać wolność jednostki.">
+    <link rel="canonical" href="https://thedigitalrepublic.org/">
+    <link rel="alternate" hreflang="pl" href="https://thedigitalrepublic.org/">
+    <link rel="alternate" hreflang="en" href="https://thedigitalrepublic.org/en/">
+    <link rel="alternate" hreflang="x-default" href="https://thedigitalrepublic.org/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Digital Republic">
+    <meta property="og:url" content="https://thedigitalrepublic.org/">
+    <meta property="og:title" content="Manifest Cyfrowej Republiki">
+    <meta property="og:description" content="Wizja państwa opartego na danych, transparentności i odpowiedzialności. Jak technologia i AI mogą służyć obywatelom, ograniczać korupcję i wzmacniać wolność jednostki.">
+    <meta property="og:image" content="https://thedigitalrepublic.org/og-image-pl-v2.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Manifest Cyfrowej Republiki">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Manifest Cyfrowej Republiki">
+    <meta name="twitter:description" content="Wizja państwa opartego na danych, transparentności i odpowiedzialności. Jak technologia i AI mogą służyć obywatelom, ograniczać korupcję i wzmacniać wolność jednostki.">
+    <meta name="twitter:image" content="https://thedigitalrepublic.org/og-image-pl-v2.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -502,6 +527,14 @@
                 "nav.support": "Wesprzyj",
                 "header.title": "Manifest Cyfrowej Republiki",
                 "header.subtitle": "Moja wizja przyszłości opartej na technologii, transparentności i odpowiedzialności.",
+                "meta.title": "Manifest Cyfrowej Republiki - TheDigitalRepublic.org",
+                "meta.description": "Manifest Cyfrowej Republiki — wizja państwa opartego na danych, transparentności i odpowiedzialności. Jak technologia i AI mogą służyć obywatelom, ograniczać korupcję i wzmacniać wolność jednostki.",
+                "meta.og_title": "Manifest Cyfrowej Republiki",
+                "meta.og_description": "Wizja państwa opartego na danych, transparentności i odpowiedzialności. Jak technologia i AI mogą służyć obywatelom, ograniczać korupcję i wzmacniać wolność jednostki.",
+                "meta.og_image": "https://thedigitalrepublic.org/og-image-pl-v2.png",
+                "meta.og_image_alt": "Manifest Cyfrowej Republiki",
+                "meta.og_locale": "pl_PL",
+                "meta.og_url": "https://thedigitalrepublic.org/",
                 "preamble.title": "Preambuła",
                 "preamble.p1": "Żyjemy w erze bezprecedensowego postępu technologicznego. Narzędzia cyfrowe, sztuczna inteligencja i globalna sieć informacyjna mają potencjał, by fundamentalnie zmienić nasze społeczeństwa na lepsze. Niniejszy manifest powstał z potrzeby budowania świadomości i przedstawienia wizji, jak technologia może i powinna wspierać poprawę codziennego życia ludzkości, zwiększać transparentność, wzmacniać odpowiedzialność i chronić wolność jednostki.",
                 "preamble.p2": "Przedstawiam zarys Cyfrowej Republiki – społeczeństwa opartego na przejrzystości, racjonalności i poszanowaniu praw, gdzie technologia służy obywatelom. Wierzę, że te zasady mogą i powinny stać się fundamentem lepszej przyszłości.",
@@ -626,6 +659,14 @@
                 "nav.support": "Support",
                 "header.title": "The Digital Republic Manifesto",
                 "header.subtitle": "My vision of the future built on technology, transparency, and accountability.",
+                "meta.title": "The Digital Republic Manifesto - TheDigitalRepublic.org",
+                "meta.description": "The Digital Republic Manifesto — a vision of a state built on data, transparency, and accountability. How technology and AI can serve citizens, curb corruption, and strengthen individual freedom.",
+                "meta.og_title": "The Digital Republic Manifesto",
+                "meta.og_description": "A vision of a state built on data, transparency, and accountability. How technology and AI can serve citizens, curb corruption, and strengthen individual freedom.",
+                "meta.og_image": "https://thedigitalrepublic.org/en/og-image-en-v2.png",
+                "meta.og_image_alt": "The Digital Republic Manifesto",
+                "meta.og_locale": "en_US",
+                "meta.og_url": "https://thedigitalrepublic.org/en/",
                 "preamble.title": "Preamble",
                 "preamble.p1": "We live in an era of unprecedented technological progress. Digital tools, artificial intelligence, and the global information network have the potential to fundamentally change our societies for the better. This manifesto was born out of the need to raise awareness and present a vision of how technology can and should support the improvement of everyday human life, increase transparency, strengthen accountability, and protect individual freedom.",
                 "preamble.p2": "I present an outline of the Digital Republic \u2013 a society based on transparency, rationality, and respect for rights, where technology serves citizens. I believe these principles can and should become the foundation of a better future.",
@@ -755,17 +796,38 @@
             return browserLang === "pl" ? "pl" : "en";
         }
 
+        function setMeta(attr, name, value) {
+            if (value === undefined) return;
+            var el = document.querySelector('meta[' + attr + '="' + name + '"]');
+            if (!el) {
+                el = document.createElement("meta");
+                el.setAttribute(attr, name);
+                document.head.appendChild(el);
+            }
+            el.setAttribute("content", value);
+        }
+
         function applyTranslations(lang) {
             activeLocale = lang;
             localStorage.setItem("dr_lang", lang);
             document.documentElement.lang = lang;
 
-            // Update page title
-            document.title = lang === "en"
-                ? "The Digital Republic Manifesto - TheDigitalRepublic.org"
-                : "Manifest Cyfrowej Republiki - TheDigitalRepublic.org";
-
             var dict = I18N[lang];
+
+            // Update page title + meta tags (SEO/OG/Twitter)
+            document.title = dict["meta.title"];
+            setMeta("name", "description", dict["meta.description"]);
+            setMeta("property", "og:title", dict["meta.og_title"]);
+            setMeta("property", "og:description", dict["meta.og_description"]);
+            setMeta("property", "og:image", dict["meta.og_image"]);
+            setMeta("property", "og:image:alt", dict["meta.og_image_alt"]);
+            setMeta("property", "og:locale", dict["meta.og_locale"]);
+            setMeta("property", "og:url", dict["meta.og_url"]);
+            setMeta("name", "twitter:title", dict["meta.og_title"]);
+            setMeta("name", "twitter:description", dict["meta.og_description"]);
+            setMeta("name", "twitter:image", dict["meta.og_image"]);
+            var canonical = document.querySelector('link[rel="canonical"]');
+            if (canonical) canonical.setAttribute("href", dict["meta.og_url"]);
 
             // data-i18n → textContent
             document.querySelectorAll("[data-i18n]").forEach(function(el) {

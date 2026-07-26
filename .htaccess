@@ -1,0 +1,27 @@
+AddHandler application/x-httpd-php82 php
+
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Allowlist OG / social / search / AI bots from LiteSpeed rate limit + mod_security
+# Cyberfolks domyślnie blokuje facebookexternalhit — to wymusza wyjątek.
+<IfModule mod_security.c>
+    SecRule REQUEST_HEADERS:User-Agent "@rx (facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|WhatsApp|TelegramBot|Discordbot|Googlebot|Bingbot|DuckDuckBot|GPTBot|ChatGPT-User|OAI-SearchBot|PerplexityBot|ClaudeBot|anthropic-ai|Applebot|Google-Extended|Amazonbot|meta-externalagent)" \
+        "id:1001,phase:1,nolog,allow,ctl:ruleEngine=Off,ctl:auditEngine=Off"
+</IfModule>
+
+# Fallback: BrowserMatch — wyłącza limity dla znanych botów na poziomie Apache/LiteSpeed
+BrowserMatchNoCase "facebookexternalhit" allowed_bot
+BrowserMatchNoCase "Facebot" allowed_bot
+BrowserMatchNoCase "Twitterbot" allowed_bot
+BrowserMatchNoCase "LinkedInBot" allowed_bot
+BrowserMatchNoCase "Slackbot" allowed_bot
+BrowserMatchNoCase "WhatsApp" allowed_bot
+BrowserMatchNoCase "TelegramBot" allowed_bot
+BrowserMatchNoCase "Discordbot" allowed_bot
+
+<RequireAll>
+    Require all granted
+</RequireAll>
