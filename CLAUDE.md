@@ -14,7 +14,7 @@ Domena: thedigitalrepublic.org
 ### Dane FTP
 - **Host:** `TheDigitalRepublic.org`
 - **User:** `tyramomphf`
-- **Hasło:** `2Lmz9EFZAhJd2K68htnW`
+- **Hasło:** w `/home/maciej/.config/cyberfolks/ftp.netrc` (poza repo, chmod 600)
 
 ### Struktura na serwerze
 ```
@@ -33,8 +33,8 @@ Ten sam plik index.html w obu lokalizacjach — język wykrywany automatycznie p
 ### Upload z CLI (HTML + obrazy)
 ```bash
 # PL — root: index.html (statyczne OG = PL) + obraz PL
-curl -s -T "index.html" --user 'tyramomphf:2Lmz9EFZAhJd2K68htnW' "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/index.html"
-curl -s -T "og-image-pl-v2.png" --user 'tyramomphf:2Lmz9EFZAhJd2K68htnW' "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/og-image-pl-v2.png"
+curl -s -T "index.html" --netrc-file /home/maciej/.config/cyberfolks/ftp.netrc "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/index.html"
+curl -s -T "og-image-pl-v2.png" --netrc-file /home/maciej/.config/cyberfolks/ftp.netrc "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/og-image-pl-v2.png"
 
 # EN — /en/: index.html z podmienionymi statycznymi OG na EN + obraz EN
 EN_DESC='A vision of a state built on data, transparency, and accountability. How technology and AI can serve citizens, curb corruption, and strengthen individual freedom.'
@@ -53,8 +53,8 @@ sed \
     -e 's|<meta name="twitter:title" content="Manifest Cyfrowej Republiki"|<meta name="twitter:title" content="The Digital Republic Manifesto"|' \
     -e "s|<meta name=\"twitter:description\" content=\"[^\"]*\">|<meta name=\"twitter:description\" content=\"${EN_DESC}\">|" \
     index.html > /tmp/index-en.html
-curl -s -T "/tmp/index-en.html" --user 'tyramomphf:2Lmz9EFZAhJd2K68htnW' "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/en/index.html"
-curl -s -T "og-image-en-v2.png" --user 'tyramomphf:2Lmz9EFZAhJd2K68htnW' "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/en/og-image-en-v2.png"
+curl -s -T "/tmp/index-en.html" --netrc-file /home/maciej/.config/cyberfolks/ftp.netrc "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/en/index.html"
+curl -s -T "og-image-en-v2.png" --netrc-file /home/maciej/.config/cyberfolks/ftp.netrc "ftp://TheDigitalRepublic.org/domains/thedigitalrepublic.org/public_html/en/og-image-en-v2.png"
 rm /tmp/index-en.html
 ```
 
